@@ -3,6 +3,12 @@ import "./globals.css"
 
 // components
 import Header from "@/components/Header"
+import Hero from "@/components/Hero"
+import About from "@/components/About"
+import Skills from "@/components/Skills"
+import Projects from "@/components/Projects"
+import Contact from "@/components/Contact"
+import Footer from "@/components/Footer"
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -20,6 +26,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={jetbrainsMono.variable}>
         <Header />
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
         {children}
       </body>
     </html>

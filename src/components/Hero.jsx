@@ -11,11 +11,7 @@ const Hero = () => {
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(150)
 
-  const textArray = [
-    "Software Developer",
-    "Aspiring Mobile Developer",
-    "Tech Ehnthusiast",
-  ]
+  const textArray = ["Software Developer", "Tech Ehnthusiast"]
   const period = 2000
 
   useEffect(() => {
@@ -52,7 +48,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white min-h-screen flex items-center">
+    <section className="bg-gradient-to-r from-black to-slate-700 text-white min-h-screen flex items-center">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between">
           <motion.div
@@ -61,24 +57,34 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Hi, I'm <span className="text-yellow-300">Boniface Kimani </span>
+            <h1 className="text-5xl md:text-7xl text-white font-extrabold mb-6 tracking-tight leading-tight">
+              Hi, I'm{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">
+                Boniface Kimani
+              </span>
             </h1>
-            <h2 className="text-2xl md:text-3xl mb-6 h-16">
-              I'm a <span className="text-yellow-300">{text}</span>
+
+            <h2 className="text-3xl md:text-4xl font-medium mb-8 h-20 animate-pulse text-white">
+              I'm a{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500">
+                {text}
+              </span>
             </h2>
-            <p className="text-lg mb-8">
+
+            <p className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl">
               I craft elegant solutions to complex problems, turning ideas into
               reality through code.
             </p>
-            <motion.button
-              className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold text-lg inline-flex items-center transition duration-300 hover:bg-yellow-300 hover:text-blue-700"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View My Work
-              <ArrowRight className="ml-2" />
-            </motion.button>
+
+            <div className="flex justify-start mt-8">
+              <a
+                href="/Resume.pdf"
+                download
+                className="inline-block rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-green-400 to-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 hover:rotate-1"
+              >
+                Download Resume
+              </a>
+            </div>
           </motion.div>
 
           <motion.div
