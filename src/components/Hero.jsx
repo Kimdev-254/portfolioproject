@@ -48,7 +48,7 @@ const Hero = () => {
   }
 
   return (
-    <section className="bg-gradient-to-r from-black to-slate-700 text-white min-h-screen flex items-center">
+    <section className="bg-gradient-to-r from-black to-slate-800 text-white min-h-screen flex items-center ">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between">
           <motion.div

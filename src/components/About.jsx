@@ -1,164 +1,93 @@
 "use client"
 
-import React, { useState } from "react"
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion"
-import { Github, ExternalLink } from "lucide-react"
+import React from "react"
+import { motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
+import { User, BookOpen, Heart } from "lucide-react"
 
-const projects = [
+const timelineData = [
   {
-    title: "Project 1",
-    description: "A brief description of Project 1 and its key features.",
-    image: "/project1.jpg",
-    technologies: ["React", "Node.js", "MongoDB"],
-    githubLink: "https://github.com/yourusername/project1",
-    liveLink: "https://project1.com",
+    title: "About Me",
+    content:
+      "Passionate software developer with a knack for turning complex problems into elegant solutions. With a strong foundation in software engineering and a deep interest in web development, machine learning, and cloud technologies, I thrive on creating intuitive, user-centered applications.My journey in technology began with a fascination for understanding the underlying mechanisms of digital tools. This curiosity has evolved into a fervent drive to build impactful solutions and contribute to meaningful projects. I excel in collaborative environments, enjoy tackling challenging coding problems, and am always eager to explore new advancements in technology.",
+    icon: User,
   },
   {
-    title: "Project 2",
-    description: "An overview of Project 2 and what makes it unique.",
-    image: "/project2.jpg",
-    technologies: ["Vue.js", "Express", "PostgreSQL"],
-    githubLink: "https://github.com/yourusername/project2",
-    liveLink: "https://project2.com",
+    title: "Education",
+    content:
+      "Bachelor of Science in Information Technology from Karatina University.",
+    icon: BookOpen,
   },
   {
-    title: "Project 3",
-    description: "Highlighting the main aspects and achievements of Project 3.",
-    image: "/project3.jpg",
-    technologies: ["Angular", "Django", "MySQL"],
-    githubLink: "https://github.com/yourusername/project3",
-    liveLink: "https://project3.com",
+    title: "Interests",
+    content:
+      "Outside of coding, I enjoy reading and experimenting with new technologies...",
+    icon: Heart,
   },
-  // Add more projects as needed
 ]
 
-const ProjectCard = ({ project, index }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const rotateX = useTransform(y, [-100, 100], [30, -30])
-  const rotateY = useTransform(x, [-100, 100], [-30, 30])
-
-  const handleMouseMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    x.set(event.clientX - centerX)
-    y.set(event.clientY - centerY)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-    setIsHovered(false)
-  }
+const TimelineItem = ({ item, index }) => {
+  const { ref, inView } = useInView({ triggerOnce: true })
 
   return (
     <motion.div
-      className="relative perspective-1000"
+      ref={ref}
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.2 }}
+      className="flex mb-8 relative"
     >
-      <div className="relative w-full h-96 rounded-xl overflow-hidden shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              className="absolute inset-0 bg-[url('/decay-texture.png')] bg-cover mix-blend-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            ></motion.div>
-          )}
-        </AnimatePresence>
-        <div className="absolute inset-0 p-6 flex flex-col justify-between text-white">
-          <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-          <p className="mb-4">{project.description}</p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.technologies.map((tech, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 bg-blue-500 rounded-full text-sm"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-          <div className="flex justify-between items-center">
-            <a
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-blue-300 transition-colors duration-200"
-            >
-              <Github className="w-6 h-6" />
-            </a>
-            <a
-              href={project.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-blue-300 transition-colors duration-200"
-            >
-              <ExternalLink className="w-6 h-6" />
-            </a>
-          </div>
+      <div className="flex flex-col items-center mr-4 z-10">
+        <div className="rounded-full bg-gradient-to-r from-green-400 to-teal-500 p-2 text-white">
+          <item.icon size={24} />
         </div>
+        {/* Removed the line rendering code */}
       </div>
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            className="absolute inset-0 rounded-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              boxShadow:
-                "0 0 20px 10px rgba(66, 153, 225, 0.5), 0 0 0 1px rgba(66, 153, 225, 0.5) inset",
-              filter: "blur(4px)",
-            }}
-          ></motion.div>
-        )}
-      </AnimatePresence>
+      <div className="bg-slate-300 rounded-lg shadow-lg p-6 sm:p-8 flex-1">
+        <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-800">
+          {item.title}
+        </h3>
+        <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+          {item.content}
+        </p>
+      </div>
     </motion.div>
   )
 }
 
-const Projects = () => {
+const ScrollBeam = () => {
   return (
-    <section className="py-20 bg-gray-900">
+    <motion.div
+      className="fixed left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-green-400 hidden sm:block"
+      initial={{ scaleY: 0 }}
+      animate={{ scaleY: 1 }}
+      transition={{ duration: 0.5 }}
+      style={{ transformOrigin: "top" }}
+    />
+  )
+}
+
+const About = () => {
+  return (
+    <section
+      id="about"
+      className="bg-gradient-to-r from-black to-slate-800 min-h-screen py-12 sm:py-20 font-mono"
+    >
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-white">
-          My Projects
+        <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-md">
+          About Me
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
-          ))}
+        <div className="relative">
+          <ScrollBeam />
+          <div className="ml-0 sm:ml-10">
+            {timelineData.map((item, index) => (
+              <TimelineItem key={index} item={item} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-export default Projects
+export default About

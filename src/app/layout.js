@@ -9,6 +9,7 @@ import Skills from "@/components/Skills"
 import Projects from "@/components/Projects"
 import Contact from "@/components/Contact"
 import Footer from "@/components/Footer"
+import Nav from "@/components/Nav"
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
         <Projects />
         <Contact />
         <Footer />
+        <Nav />
         {children}
       </body>
     </html>

@@ -7,3 +7,7 @@
     @apply font-primary bg-primary text-white leading-loose;
   }
 }
+html.dark {
+  background-color: #1a202c; /* Example dark background */
+  color: #f7fafc; /* Example light text */
+}

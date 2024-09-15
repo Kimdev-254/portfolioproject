@@ -77,15 +77,10 @@ const Skills = () => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-black to-slate-700 min-h-screen flex flex-col items-center py-16 px-4">
-      <motion.h2
-        className="text-5xl sm:text-6xl font-extrabold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-teal-500 to-blue-500"
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: "easeInOut" }}
-      >
-        Programming Skills
-      </motion.h2>
+    <div className="bg-gradient-to-r from-slate-800 to-black min-h-screen flex flex-col items-center py-16 px-4">
+      <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-md">
+        Skills
+      </h2>
 
       <div className="flex flex-col md:flex-row space-y-12 md:space-y-0 md:space-x-16 w-full max-w-6xl">
         {/* Left Section - Skill Progress */}

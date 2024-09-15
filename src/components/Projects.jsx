@@ -138,7 +138,10 @@ const ProjectCard = ({ project, index }) => {
 
 const Projects = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white">
+    <section
+      id="projects"
+      className="py-20 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white"
+    >
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-md">
           My Projects

@@ -13,15 +13,9 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <motion.h2
-              className="text-2xl font-bold"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              Your Name
-            </motion.h2>
-            <p className="text-gray-400">Full Stack Developer</p>
+            <p className="text-gray-400 font-style:italic">
+              Software Developer
+            </p>
           </div>
 
           <motion.div
@@ -64,43 +58,17 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
         />
 
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-center items-center">
           <motion.div
             className="mb-4 md:mb-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <p className="text-gray-400">
-              &copy; {currentYear} Your Name. All rights reserved.
+            <p className="text-gray-400 flex justify-center">
+              &copy; {currentYear} Kimde-254. All rights reserved.
             </p>
           </motion.div>
-
-          <motion.nav
-            className="flex space-x-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <Link
-              href="#about"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              About
-            </Link>
-            <Link
-              href="#projects"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              Projects
-            </Link>
-            <Link
-              href="#contact"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              Contact
-            </Link>
-          </motion.nav>
         </div>
       </div>
     </footer>

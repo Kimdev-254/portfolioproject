@@ -9,6 +9,7 @@ const Contact = () => {
 
   return (
     <motion.section
+      id="contact"
       className="py-16 bg-gradient-to-r from-black to-slate-700 text-white"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}

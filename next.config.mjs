@@ -1,3 +1,4 @@
+// next.config.mjs
 /** @type {import('next').NextConfig} */
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 let assetPrefix = ""
@@ -18,4 +19,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig
