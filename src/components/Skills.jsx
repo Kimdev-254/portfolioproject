@@ -50,8 +50,8 @@ const Skills = () => {
     python: 0,
     firebase: 0,
     nextjs: 0,
-    javascript: 0,
     react: 0,
+    javascript: 0,
   })
 
   const containerRef = useRef(null)
@@ -68,8 +68,8 @@ const Skills = () => {
         python: 50,
         firebase: 55,
         nextjs: 60,
-        javascript: 70,
-        react: 80,
+        react: 70,
+        javascript: 80,
       })
     }, 500)
     return () => clearTimeout(timer)

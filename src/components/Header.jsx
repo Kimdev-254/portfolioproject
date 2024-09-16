@@ -24,7 +24,7 @@ const Header = () => {
           className="inline-block text-4xl font-extrabold font-mono tracking-tight"
         >
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 hover:text-cyan-500 transition-colors duration-300">
-            Kim
+            Kimdev-254
           </span>
           <span className="text-white">.</span>
         </Link>
