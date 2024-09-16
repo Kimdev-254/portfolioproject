@@ -10,7 +10,7 @@ const Contact = () => {
   return (
     <motion.section
       id="contact"
-      className="py-16 bg-gradient-to-r from-black to-slate-700    dark:to-slate-800 text-gray-800 dark:text-white"
+      className="py-16 bg-gradient-to-r from-black to-slate-700 dark:to-slate-800 text-gray-800 dark:text-white"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -19,8 +19,8 @@ const Contact = () => {
         <h2 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
           Get in Touch
         </h2>
-        <p className="text-xl mb-8  text-slate-400">
-          Have a question or want to work together? Let's connect!
+        <p className="text-xl mb-8 text-slate-400">
+          Have a question or want to work together? Let&apos;s connect!
         </p>
         <motion.button
           onClick={() => setIsFormOpen(true)}
@@ -52,7 +52,7 @@ const ContactForm = ({ onClose }) => {
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full shadow-2xl "
+        className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full shadow-2xl"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
@@ -68,7 +68,7 @@ const ContactForm = ({ onClose }) => {
             <X size={24} />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4 ">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="name"

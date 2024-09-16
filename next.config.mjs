@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const isGithubActions = process.env.GITHUB_ACTIONS || false
 let assetPrefix = ""
@@ -17,6 +16,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  output: "export",
 }
 
 export default nextConfig

@@ -1,9 +1,8 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback, useMemo } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
 
 const Hero = () => {
   const [text, setText] = useState("")
@@ -11,20 +10,12 @@ const Hero = () => {
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(150)
 
-  const textArray = ["Software Developer", "Tech Ehnthusiast"]
+  // Memoize textArray to avoid re-creating it on every render
+  const textArray = useMemo(() => ["Software Developer", "Tech Enthusiast"], [])
   const period = 2000
 
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick()
-    }, typingSpeed)
-
-    return () => {
-      clearInterval(ticker)
-    }
-  }, [text])
-
-  const tick = () => {
+  // useCallback for tick function
+  const tick = useCallback(() => {
     let i = loopNum % textArray.length
     let fullText = textArray[i]
     let updatedText = isDeleting
@@ -42,13 +33,23 @@ const Hero = () => {
       setTypingSpeed(period)
     } else if (isDeleting && updatedText === "") {
       setIsDeleting(false)
-      setLoopNum(loopNum + 1)
+      setLoopNum((prevLoopNum) => prevLoopNum + 1)
       setTypingSpeed(150)
     }
-  }
+  }, [isDeleting, loopNum, text, textArray, period])
+
+  useEffect(() => {
+    const ticker = setInterval(() => {
+      tick()
+    }, typingSpeed)
+
+    return () => {
+      clearInterval(ticker)
+    }
+  }, [text, tick, typingSpeed])
 
   return (
-    <section className="bg-gradient-to-r from-black to-slate-800 text-white min-h-screen flex items-center ">
+    <section className="bg-gradient-to-r from-black to-slate-800 text-white min-h-screen flex items-center">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between">
           <motion.div
@@ -58,14 +59,14 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-5xl md:text-7xl text-white font-extrabold mb-6 tracking-tight leading-tight">
-              Hi, I'm{" "}
+              Hi, I&apos;m{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">
                 Boniface Kimani
               </span>
             </h1>
 
             <h2 className="text-3xl md:text-4xl font-medium mb-8 h-20 animate-pulse text-white">
-              I'm a{" "}
+              I&apos;m a{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500">
                 {text}
               </span>
@@ -97,8 +98,9 @@ const Hero = () => {
               <div className="absolute inset-0 bg-yellow-300 rounded-tr-[60px] rounded-bl-[60px] transform md:hidden"></div>
               <Image
                 src="/myimage.jpeg"
-                layout="fill"
-                objectFit="cover"
+                alt="kim"
+                fill
+                style={{ objectFit: "cover" }}
                 className="rounded-tr-[60px] rounded-bl-[60px] transform md:rotate-12 shadow-lg shadow-yellow-500/50"
               />
             </div>

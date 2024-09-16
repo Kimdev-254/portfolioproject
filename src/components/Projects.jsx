@@ -1,37 +1,38 @@
 "use client"
 
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useCallback } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
 import { Github, ExternalLink } from "lucide-react"
 import Slider from "react-slick"
+import Image from "next/image"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
 const projects = [
   {
     title: "Waweru Advocates Website",
-    description: "",
+    description:
+      "A fully responsive website built using React and Node.js for a law firm.",
     image: "/project1.png",
     technologies: ["React", "Node.js"],
     githubLink: "https://github.com/Kimdev-254/waweruAdvocates.git",
     liveLink: "https://example.com", // Update with a live URL
   },
   {
-    title:
-      "A Firebase form app that I used for student attachment documentation",
-    description: "",
+    title: "Firebase Form App for Student Documentation",
+    description:
+      "A Firebase-based app that manages student attachment reports and documentation.",
     image: "/project2.png",
     technologies: ["Next.js", "Firebase", "TailwindCSS"],
     githubLink: "https://github.com/Kimdev-254/Next.js-Firebase-app.git",
     liveLink: "https://attachmentdocs-fbce6.web.app/",
   },
   {
-    title: "Mockup design in Figma for mobile app",
-    description: "",
+    title: "Mobile App Mockup Design",
+    description: "A high-fidelity mobile app mockup designed using Figma.",
     image: "/project3.png",
     technologies: ["Figma"],
   },
-  // Add more projects as needed
 ]
 
 const ProjectCard = ({ project }) => {
@@ -43,7 +44,7 @@ const ProjectCard = ({ project }) => {
     if (isInView) {
       mainControls.start("visible")
     }
-  }, [isInView])
+  }, [isInView, mainControls])
 
   return (
     <motion.div
@@ -58,15 +59,19 @@ const ProjectCard = ({ project }) => {
       className="relative mx-2"
     >
       <div className="relative w-full h-96 rounded-xl overflow-hidden shadow-lg">
-        <img
+        <Image
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover"
+          layout="fill"
+          objectFit="cover"
+          className="w-full h-full"
         />
         <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6 text-white">
           <div>
             <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-            <p className="mb-4 text-sm">{project.description}</p>
+            {project.description && (
+              <p className="mb-4 text-sm">{project.description}</p>
+            )}
             <div className="flex flex-wrap gap-2 mb-4">
               {project.technologies.map((tech, index) => (
                 <span
