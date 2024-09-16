@@ -1,3 +1,2 @@
 Frameworks used:
-Next.js
-Framer motion
+-Next.js & Framer motion
