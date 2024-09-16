@@ -41,7 +41,6 @@ const TimelineItem = ({ item, index }) => {
         <div className="rounded-full bg-gradient-to-r from-green-400 to-teal-500 p-2 text-white">
           <item.icon size={24} />
         </div>
-        {/* Removed the line rendering code */}
       </div>
       <div className="bg-slate-300 rounded-lg shadow-lg p-6 sm:p-8 flex-1">
         <h3 className="text-lg sm:text-xl font-bold mb-3 text-gray-800">

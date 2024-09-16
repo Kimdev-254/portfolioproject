@@ -1,8 +1,8 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 // Dynamic import for the IconCloud component
 const IconCloud = dynamic(() => import("@/components/magicui/icon-cloud"), {
@@ -44,91 +44,154 @@ const iconSlugs = [
 ]
 
 const Skills = () => {
-  // State for skill progress
   const [skills, setSkills] = useState({
-    javascript: 0,
-    react: 0,
-    nextjs: 0,
-    python: 0,
     mysql: 0,
     mongodb: 0,
+    python: 0,
     firebase: 0,
+    nextjs: 0,
+    javascript: 0,
+    react: 0,
+  })
+
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
   })
 
   useEffect(() => {
-    // Simulate loading of skill data
-    setSkills({
-      javascript: 70,
-      react: 50,
-      nextjs: 50,
-      python: 40,
-      mysql: 30,
-      mongodb: 40,
-      firebase: 60,
-    })
+    const timer = setTimeout(() => {
+      setSkills({
+        mysql: 30,
+        mongodb: 40,
+        python: 50,
+        firebase: 55,
+        nextjs: 60,
+        javascript: 70,
+        react: 80,
+      })
+    }, 500)
+    return () => clearTimeout(timer)
   }, [])
 
-  // Function to determine progress bar color based on percentage
-  const getProgressBarColor = (percentage) => {
-    if (percentage >= 75) return "bg-green-500"
-    if (percentage >= 50) return "bg-yellow-500"
-    if (percentage >= 25) return "bg-orange-500"
-    return "bg-red-500"
+  const skillColors = {
+    mysql: "from-blue-400 to-blue-600",
+    mongodb: "from-green-400 to-green-600",
+    python: "from-yellow-400 to-yellow-600",
+    firebase: "from-orange-400 to-orange-600",
+    nextjs: "from-purple-400 to-purple-600",
+    javascript: "from-yellow-300 to-yellow-500",
+    react: "from-cyan-400 to-cyan-600",
+  }
+
+  const fadeInVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
   }
 
   return (
-    <div className="bg-gradient-to-r from-slate-800 to-black min-h-screen flex flex-col items-center py-16 px-4">
-      <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-md">
-        Skills
-      </h2>
+    <motion.div
+      ref={containerRef}
+      className="bg-gradient-to-r from-slate-900 to-black min-h-screen flex flex-col items-center py-16 px-4"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      variants={{
+        visible: { transition: { staggerChildren: 0.2 } },
+      }}
+    >
+      <motion.h2
+        className="text-5xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-lg p-2 rounded-lg"
+        variants={fadeInVariants}
+      >
+        Skills & Expertise
+      </motion.h2>
 
       <div className="flex flex-col md:flex-row space-y-12 md:space-y-0 md:space-x-16 w-full max-w-6xl">
         {/* Left Section - Skill Progress */}
-        <div className="flex flex-col space-y-6 text-white w-full md:w-1/2">
-          {Object.entries(skills)
-            .sort(([, a], [, b]) => b - a) // Sort skills by percentage in descending order
-            .map(([skill, percentage]) => (
-              <div key={skill} className="flex flex-col">
-                <h3
-                  className={`text-xl sm:text-2xl font-semibold mb-2 text-gradient bg-gradient-to-r from-${getGradientColor(
-                    percentage
-                  )}-400 to-${getGradientColor(percentage)}-500 bg-clip-text`}
-                >
+        <motion.div
+          className="flex flex-col space-y-6 text-white w-full md:w-1/2"
+          variants={fadeInVariants}
+        >
+          {Object.entries(skills).map(([skill, percentage]) => (
+            <motion.div
+              key={skill}
+              className="flex flex-col"
+              variants={fadeInVariants}
+            >
+              <div className="flex justify-between items-center mb-1">
+                <h3 className="text-sm font-medium text-gray-300">
                   {capitalize(skill)}
                 </h3>
-                <div className="relative w-full bg-gray-700 rounded-full h-6">
-                  <div
-                    className={`${getProgressBarColor(
-                      percentage
-                    )} h-full rounded-full`}
-                    style={{ width: `${percentage}%` }}
-                  />
-                  <span className="absolute inset-0 flex items-center justify-center text-xs font-medium text-white">
-                    {percentage}%
-                  </span>
-                </div>
+                <span className="text-sm font-medium text-gray-300">
+                  {percentage}%
+                </span>
               </div>
-            ))}
-        </div>
+              <div className="relative w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                <motion.div
+                  className={`h-2.5 rounded-full bg-gradient-to-r ${skillColors[skill]}`}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${percentage}%` }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Right Section - IconCloud */}
-        <div className="w-full md:w-1/2 flex items-center justify-center">
+        <motion.div
+          className="w-full md:w-1/2 flex items-center justify-center"
+          variants={fadeInVariants}
+        >
           <IconCloud iconSlugs={iconSlugs} />
-        </div>
+        </motion.div>
       </div>
-    </div>
+
+      {/* Skill Categories Section */}
+      <motion.div className="mt-16 w-full max-w-6xl" variants={fadeInVariants}>
+        <h3 className="text-3xl font-bold text-center mb-8 text-white">
+          Skill Categories
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {["Frontend", "Backend", "Mobile"].map((category) => (
+            <motion.div
+              key={category}
+              className="bg-gray-800 rounded-lg p-6 shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <h4 className="text-xl font-semibold mb-4 text-teal-400">
+                {category} Development
+              </h4>
+              <ul className="list-disc list-inside text-white space-y-2">
+                {getSkillList(category).map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
   )
 }
 
-// Capitalize function for skill names
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
-// Function to determine gradient color based on percentage
-const getGradientColor = (percentage) => {
-  if (percentage >= 75) return "green"
-  if (percentage >= 50) return "yellow"
-  if (percentage >= 25) return "orange"
-  return "red"
+const getSkillList = (category) => {
+  switch (category) {
+    case "Frontend":
+      return ["React", "Next.js", "HTML5", "CSS3", "Tailwind CSS"]
+    case "Backend":
+      return ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB"]
+    case "Mobile":
+      return ["React Native", "Flutter", "Android (Java)", "iOS (Swift)"]
+    default:
+      return []
+  }
 }
 
 export default Skills

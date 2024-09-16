@@ -8,6 +8,9 @@
   }
 }
 html.dark {
-  background-color: #1a202c; /* Example dark background */
-  color: #f7fafc; /* Example light text */
+  background-color: #1a202c;
+  color: #f7fafc;
+}
+html {
+  scroll-behavior: smooth;
 }

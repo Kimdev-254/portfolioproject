@@ -1,7 +1,10 @@
 import { JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 // components
+import LenisSmoothScroll from "@/components/LenisSmoothScroll"
 import Header from "@/components/Header"
 import Hero from "@/components/Hero"
 import About from "@/components/About"

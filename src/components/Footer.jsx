@@ -13,40 +13,40 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-gray-400 font-style:italic">
+            <p className="text-gray-400 font-style:italic hover:text-cyan-500 transform hover:scale-110 transition-transform duration-300">
               Software Developer
             </p>
           </div>
 
           <motion.div
-            className="flex space-x-4"
+            className="flex space-x-4 "
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Link
-              href="https://github.com/yourusername"
+              href="https://github.com/Kimdev-254/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Github className="w-6 h-6 text-gray-400 hover:text-white transition-colors duration-300" />
+              <Github className="w-6 h-6 text-gray-400 hover:text-cyan-500 transform hover:scale-110 transition-transform duration-300" />
             </Link>
             <Link
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/boniface-kimani-49ba6030a/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Linkedin className="w-6 h-6 text-gray-400 hover:text-white transition-colors duration-300" />
+              <Linkedin className="w-6 h-6 text-gray-400 hover:text-cyan-500 transform hover:scale-110 transition-transform duration-300" />
             </Link>
             <Link
-              href="https://twitter.com/yourusername"
+              href="https://x.com/Kimdev254"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Twitter className="w-6 h-6 text-gray-400 hover:text-white transition-colors duration-300" />
+              <Twitter className="w-6 h-6 text-gray-400 hover:text-cyan-500 transform hover:scale-110 transition-transform duration-300" />
             </Link>
-            <Link href="mailto:your.email@example.com">
-              <Mail className="w-6 h-6 text-gray-400 hover:text-white transition-colors duration-300" />
+            <Link href="mailto:bonifacekimani715@gmail.com">
+              <Mail className="w-6 h-6 text-gray-400 hover:text-cyan-500 transform hover:scale-110 transition-transform duration-300" />
             </Link>
           </motion.div>
         </div>
