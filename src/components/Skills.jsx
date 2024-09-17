@@ -93,6 +93,7 @@ const Skills = () => {
   return (
     <motion.div
       ref={containerRef}
+      id="skills"
       className="bg-gradient-to-r from-slate-900 to-black min-h-screen flex flex-col items-center py-16 px-4"
       initial="hidden"
       whileInView="visible"
@@ -110,7 +111,6 @@ const Skills = () => {
       </motion.h2>
 
       <div className="flex flex-col md:flex-row space-y-12 md:space-y-0 md:space-x-16 w-full max-w-6xl">
-        {/* Left Section - Skill Progress */}
         <motion.div
           className="flex flex-col space-y-6 text-white w-full md:w-1/2"
           variants={fadeInVariants}

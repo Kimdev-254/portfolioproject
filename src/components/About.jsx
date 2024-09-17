@@ -70,7 +70,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="bg-gradient-to-r from-black to-slate-800 min-h-screen py-12 sm:py-20 font-mono"
+      className="bg-gradient-to-r from-black via-slate-800 to-black py-12 sm:py-20 font-mono"
     >
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-md">

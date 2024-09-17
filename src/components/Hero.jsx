@@ -10,11 +10,9 @@ const Hero = () => {
   const [loopNum, setLoopNum] = useState(0)
   const [typingSpeed, setTypingSpeed] = useState(150)
 
-  // Memoize textArray to avoid re-creating it on every render
   const textArray = useMemo(() => ["Software Developer", "Tech Enthusiast"], [])
   const period = 2000
 
-  // useCallback for tick function
   const tick = useCallback(() => {
     let i = loopNum % textArray.length
     let fullText = textArray[i]
@@ -49,7 +47,7 @@ const Hero = () => {
   }, [text, tick, typingSpeed])
 
   return (
-    <section className="bg-gradient-to-r from-black to-slate-800 text-white min-h-screen flex items-center">
+    <section className="bg-gradient-to-r from-black to-gray-900 text-white min-h-screen flex items-center">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between">
           <motion.div

@@ -137,7 +137,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-20 bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white"
+      className="py-20 bg-gradient-to-r from-black to-slate-900 text-white"
     >
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 shadow-md">

@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
 import { Mail, X } from "lucide-react"
+import { Toaster, toast } from "react-hot-toast"
 
 const Contact = () => {
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -10,11 +11,12 @@ const Contact = () => {
   return (
     <motion.section
       id="contact"
-      className="py-16 bg-gradient-to-r from-black to-slate-700 dark:to-slate-800 text-gray-800 dark:text-white"
+      className="py-16 bg-gradient-to-r from-black via-slate-800 to-black text-gray-800 dark:text-white"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
           Get in Touch
@@ -37,10 +39,43 @@ const Contact = () => {
 }
 
 const ContactForm = ({ onClose }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log("Form submitted")
+
+    console.log("Form submitted", formData)
+
+    toast.promise(
+      new Promise((resolve) => setTimeout(resolve, 2000)),
+      {
+        loading: "Sending message...",
+        success: "Message sent successfully!",
+        error: "Failed to send message.",
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+        success: {
+          duration: 3000,
+          icon: "🎉",
+        },
+      }
+    )
+
     onClose()
   }
 
@@ -80,6 +115,8 @@ const ContactForm = ({ onClose }) => {
               type="text"
               id="name"
               name="name"
+              value={formData.name}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition duration-150"
               placeholder="Your name"
@@ -96,6 +133,8 @@ const ContactForm = ({ onClose }) => {
               type="email"
               id="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition duration-150"
               placeholder="your.email@example.com"
@@ -111,6 +150,8 @@ const ContactForm = ({ onClose }) => {
             <textarea
               id="message"
               name="message"
+              value={formData.message}
+              onChange={handleChange}
               rows="4"
               required
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition duration-150"
