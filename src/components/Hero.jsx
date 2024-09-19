@@ -77,7 +77,7 @@ const Hero = () => {
 
             <div className="flex justify-start mt-8">
               <a
-                href="/Resume.pdf"
+                href="Resume.pdf"
                 download
                 className="inline-block rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-green-400 to-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 hover:rotate-1"
               >
