@@ -38,30 +38,25 @@ const Hero = () => {
   }, [isDeleting, loopNum, text, textArray, period])
 
   useEffect(() => {
-    const ticker = setInterval(() => {
-      tick()
-    }, typingSpeed)
-
-    return () => {
-      clearInterval(ticker)
-    }
-  }, [text, tick, typingSpeed])
+    const ticker = setInterval(tick, typingSpeed)
+    return () => clearInterval(ticker)
+  }, [tick, typingSpeed])
 
   const handleDownload = async () => {
     try {
       const response = await fetch("/Resume.pdf")
-      if (!response.ok) {
-        throw new Error("Resume file not found")
-      }
+      if (!response.ok) throw new Error("Resume file not found")
+
       const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
+      const url = URL.createObjectURL(blob)
       const a = document.createElement("a")
       a.style.display = "none"
       a.href = url
       a.download = "Boniface_Kimani_Resume.pdf"
       document.body.appendChild(a)
       a.click()
-      window.URL.revokeObjectURL(url)
+      URL.revokeObjectURL(url)
+      document.body.removeChild(a)
       setDownloadError(null)
     } catch (error) {
       console.error("Download failed:", error)
@@ -80,14 +75,14 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-5xl md:text-7xl text-white font-extrabold mb-6 tracking-tight leading-tight">
-              Hi, I'm{" "}
+              Hi, I&apos;m{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">
                 Boniface Kimani
               </span>
             </h1>
 
             <h2 className="text-3xl md:text-4xl font-medium mb-8 h-20 animate-pulse text-white">
-              I'm a{" "}
+              I&apos;m a{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500">
                 {text}
               </span>
@@ -121,8 +116,10 @@ const Hero = () => {
               <div className="absolute inset-0 bg-yellow-300 rounded-tr-[60px] rounded-bl-[60px] transform md:hidden"></div>
               <Image
                 src="/myimage.JPG"
-                alt="kim"
+                alt="Boniface Kimani"
                 fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: "cover" }}
                 className="rounded-tr-[60px] rounded-bl-[60px] transform md:rotate-12 shadow-lg shadow-yellow-500/50"
               />
