@@ -44,7 +44,10 @@ const Hero = () => {
 
   const handleDownload = async () => {
     try {
-      const response = await fetch("/Resume.pdf")
+      // Use the full URL to your resume file
+      const resumeUrl =
+        "https://Kimdev-254.github.io/portfolioproject/Resume.pdf"
+      const response = await fetch(resumeUrl)
       if (!response.ok) throw new Error("Resume file not found")
 
       const blob = await response.blob()
