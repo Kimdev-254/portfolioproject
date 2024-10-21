@@ -9,7 +9,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="py-16 bg-gradient-to-r from-black via-slate-800 to-black text-white">
+    <footer className="py-16 bg-[url('/curve.svg')] bg-no-repeat bg-center bg-cover pt-16 pb-8 text-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
