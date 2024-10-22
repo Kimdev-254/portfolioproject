@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header
       id="home"
-      className="w-full py-5 bg-gradient-to-r from-gray-900 via-black to-gray -900 text-white shadow-lg"
+      className="w-full py-5 bg-[url('/dots1.svg')] bg-no-repeat bg-center bg-cover pt-16 pb-8 text-white shadow-lg"
     >
       <div className="container mx-auto px-4">
         <Link
